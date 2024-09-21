@@ -34,7 +34,11 @@ const App:React.FC = () => {
         return product.name.toLowerCase().includes(searchKeys.toLowerCase());
       });
     }
-    
+
+    if(category !== "All Products") {
+      P = P.filter((product) => product.category === category);
+    }
+
     setFilteredProducts(P);
 
   }, [searchKeys, category, products]);
@@ -47,10 +51,10 @@ const App:React.FC = () => {
           <Form.Label>Search by Category</Form.Label>
           <Form.Group>
             <Form.Control as="select" value={category} onChange={(e) => setCategory(e.target.value)} >
-              <option value="">All Products</option>
-              <option value="">Electronics</option>
-              <option value="">Clothing</option>
-              <option value="">Accessories</option>
+              <option value="All Products">All Products</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Accessories">Accessories</option>
             </Form.Control>
           </Form.Group>
         </Col>
