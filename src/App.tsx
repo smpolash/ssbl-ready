@@ -18,6 +18,8 @@ const App:React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
   const [searchKeys, setSearchKeys] = useState('');
 
+  const totalProductCount = products?.length;
+  const filteredProductCount = filteredProducts?.length;
 
   useEffect(()=> {
     const allProducts = getProduct();
@@ -46,10 +48,16 @@ const App:React.FC = () => {
   return (
     <Container>
       <h1 className='my-3 fw-bold'>Product List</h1>
+      <Row className="mb-2">
+        <Col className='d-flex flex-row justify-content-between align-items-end'>
+          <h5>Total Products: {totalProductCount}</h5>
+          <h6>Showing: {filteredProductCount} {category !== 'All Products' ? `in ${category}` : 'Products'}</h6>
+        </Col>
+      </Row>
       <Row className='mb-2'>
         <Col md={6}>
-          <Form.Label>Search by Category</Form.Label>
-          <Form.Group>
+          <Form.Label className='mb-0'>Search by Category</Form.Label>
+          <Form.Group className='mb-2'>
             <Form.Control as="select" value={category} onChange={(e) => setCategory(e.target.value)} >
               <option value="All Products">All Products</option>
               <option value="Electronics">Electronics</option>
@@ -59,8 +67,8 @@ const App:React.FC = () => {
           </Form.Group>
         </Col>
         <Col md={6}>
-          <Form.Group>
-            <Form.Label>Search by Name</Form.Label>
+          <Form.Group className='mb-2'>
+            <Form.Label className='mb-0'>Search by Name</Form.Label>
             <Form.Control type='text' placeholder='Type product name...' value={searchKeys} onChange={(e) => setSearchKeys(e.target.value)} />
           </Form.Group>
         </Col>
