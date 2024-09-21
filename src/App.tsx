@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import ProductCard from './components/ProductCard';
 import {getProduct} from './services/ProductService';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 
 interface IProduct {
   name: string;
@@ -16,6 +16,7 @@ const App:React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const [category, setCategory] = useState("All Products");
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
+  const [searchKeys, setSearchKeys] = useState('');
 
 
   useEffect(()=> {
@@ -25,12 +26,40 @@ const App:React.FC = () => {
     // console.log(allProducts);
   }, [])
 
+  useEffect(() => {
+    let P = products;
+
+    if (searchKeys){
+      P = P.filter((product) => {
+        return product.name.toLowerCase().includes(searchKeys.toLowerCase());
+      });
+    }
+    
+    setFilteredProducts(P);
+
+  }, [searchKeys, category, products]);
+
   return (
     <Container>
-      <h1 className='my-3'>Product List</h1>
+      <h1 className='my-3 fw-bold'>Product List</h1>
       <Row className='mb-2'>
-        <Col md={6}></Col>
-        <Col md={6}></Col>
+        <Col md={6}>
+          <Form.Label>Search by Category</Form.Label>
+          <Form.Group>
+            <Form.Control as="select" value={category} onChange={(e) => setCategory(e.target.value)} >
+              <option value="">All Products</option>
+              <option value="">Electronics</option>
+              <option value="">Clothing</option>
+              <option value="">Accessories</option>
+            </Form.Control>
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group>
+            <Form.Label>Search by Name</Form.Label>
+            <Form.Control type='text' placeholder='Type product name...' value={searchKeys} onChange={(e) => setSearchKeys(e.target.value)} />
+          </Form.Group>
+        </Col>
       </Row>
       <Row>
         {filteredProducts.map((product, index) => (
