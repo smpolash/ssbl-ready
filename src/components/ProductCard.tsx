@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Badge, Card } from "react-bootstrap";
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 
@@ -12,8 +13,8 @@ interface IProduct {
 
 const ProductCard: React.FC<IProduct> = ({name, price, description, category,}) => {
   
-  const [width, setWidth] = useState(300);
-  const [height, setHeight] = useState(400);
+  const [width, setWidth] = useState(305);
+  const [height, setHeight] = useState(350);
   
   return (
     <ResizableBox
@@ -27,14 +28,17 @@ const ProductCard: React.FC<IProduct> = ({name, price, description, category,}) 
       minConstraints={[200, 300]}
       maxConstraints={[600, 800]}
     >
-    <div className="card" style={{width:'100%', height:'100%'}}>
-      <div className="card-body">
-        <h5 className="card-title">{name}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">{price}</h6>
-        <p className="card-text">{description}</p>
-        <p className="card-text">{category}</p>
-      </div>
-    </div>
+    <Card className="card h-100 w-100 shadow-sm border-info-subtle">
+      <Card.Img className="opacity-50" variant="top" src="images/placeholder.jpg" />
+      <Card.Body className="card-body">
+        <div className="d-flex justify-content-between align-items-end">
+          <Card.Title className="text-info">{name}</Card.Title>
+          <Card.Subtitle className="card-subtitle mb-2 text-danger fs-5">{price}</Card.Subtitle>
+        </div>
+        <Card.Text className="lh-1 mt-1 text-muted">{description}</Card.Text>
+      </Card.Body>
+      <Card.Footer className="bg-white border-0"><Badge bg="light" text="dark" className="fs-6 fw-normal">{category}</Badge> </Card.Footer>
+    </Card>
     </ResizableBox>
   );
 };

@@ -47,35 +47,36 @@ const App:React.FC = () => {
 
   return (
     <Container>
-      <h1 className='my-3 fw-bold'>Product List</h1>
-      <Row className="mb-2">
-        <Col className='d-flex flex-row justify-content-between align-items-end'>
-          <h5>Total Products: {totalProductCount}</h5>
-          <h6>Showing: {filteredProductCount} {category !== 'All Products' ? `in ${category}` : 'Products'}</h6>
-        </Col>
-      </Row>
+      <h1 className='mt-4 mb-0 fw-bold text-info'>Products</h1>      
       <Row className='mb-2'>
-        <Col md={6}>
-          <Form.Label className='mb-0'>Search by Category</Form.Label>
+        <Col md={6} className='d-flex flex-row justify-content-between align-items-end'>
+          <p className='d-inline-flex gap-3 mb-1'>
+            <span className=''>Total: <strong>{totalProductCount} Products</strong></span>
+            <span>Showing: <strong>{filteredProductCount} {category !== 'All Products' ? `in ${category}` : 'Products'}</strong></span>
+          </p>
+        </Col>
+        <Col md={3}>
           <Form.Group className='mb-2'>
-            <Form.Control as="select" value={category} onChange={(e) => setCategory(e.target.value)} >
+            <Form.Label className='mb-1'>Search by Name</Form.Label>
+            <Form.Control className='form-control-sm' type='text' placeholder='Type product name...' value={searchKeys} onChange={(e) => setSearchKeys(e.target.value)} />
+          </Form.Group>
+        </Col>
+        <Col md={3}>
+          <Form.Label className='mb-1'>Search by Category</Form.Label>
+          <Form.Group className='mb-2'>
+            <Form.Control as="select" className='form-control-sm' value={category} onChange={(e) => setCategory(e.target.value)} >
               <option value="All Products">All Products</option>
               <option value="Electronics">Electronics</option>
               <option value="Clothing">Clothing</option>
               <option value="Accessories">Accessories</option>
             </Form.Control>
           </Form.Group>
-        </Col>
-        <Col md={6}>
-          <Form.Group className='mb-2'>
-            <Form.Label className='mb-0'>Search by Name</Form.Label>
-            <Form.Control type='text' placeholder='Type product name...' value={searchKeys} onChange={(e) => setSearchKeys(e.target.value)} />
-          </Form.Group>
-        </Col>
+        </Col>        
       </Row>
-      <Row>
+      <hr className='mb-3 mt-2 border' />
+      <Row xs={1} md={3} xl={4} className="g-4">
         {filteredProducts.map((product, index) => (
-          <Col key={index} sm={12} md={6} lg={4} className='mb-3'>
+          <Col key={index} className='mb-0'>
             <ProductCard {...product} />
           </Col> 
         ))}
