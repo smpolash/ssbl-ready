@@ -29,7 +29,7 @@ const ProductCard: React.FC<IProduct> = ({name, price, description, category,}) 
       maxConstraints={[600, 800]}
     >
     <Card className="card h-100 w-100 shadow-sm border-info-subtle">
-      <Card.Img className="opacity-75" variant="top" src="images/placeholder.jpg" />
+      <Card.Img variant="top" src="images/placeholder.jpg" />
       <Card.Body className="card-body">
         <div className="d-flex justify-content-between align-items-end">
           <Card.Title className="text-info">{name}</Card.Title>
