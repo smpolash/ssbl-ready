@@ -25,7 +25,8 @@ const App:React.FC = () => {
     const allProducts = getProduct();
     setProducts(allProducts);
     setFilteredProducts(allProducts);
-    // console.log(allProducts);
+
+    document.title = 'Products Catalog'
   }, [])
 
   useEffect(() => {
@@ -47,10 +48,10 @@ const App:React.FC = () => {
 
   return (
     <Container>
-      <h1 className='mt-4 mb-0 fw-bold text-info'>Products</h1>      
-      <Row className='mb-2'>
-        <Col md={6} className='d-flex flex-row justify-content-between align-items-end'>
-          <p className='d-inline-flex gap-3 mb-1'>
+      <Row className='mb-2 align-items-end'>
+        <Col md={6} className='d-flex flex-column justify-content-between align-items-start'>
+          <h1 className='mt-4 mb-0 fw-bold text-info'>Products</h1>      
+          <p className='d-flex gap-3 mb-1'>
             <span className=''>Total: <strong>{totalProductCount} Products</strong></span>
             <span>Showing: <strong>{filteredProductCount} {category !== 'All Products' ? `in ${category}` : 'Products'}</strong></span>
           </p>
