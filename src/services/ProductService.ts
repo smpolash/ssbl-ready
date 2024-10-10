@@ -37,6 +37,24 @@ export const getProduct = () => {
       description: "Stylish wristwatch with a leather band.",
       category: "Accessories",
     },
+    {
+      name: "Headset",
+      price: "$199.99",
+      description: "Noise-cancelling wireless headphones.",
+      category: "Electronics",
+    },
+    {
+      name: "V-Shirt",
+      price: "$19.99",
+      description: "A casual t-shirt in various colors.",
+      category: "Clothing",
+    },
+    {
+      name: "Watch",
+      price: "$189.99",
+      description: "Stylish wristwatch with a leather band.",
+      category: "Accessories",
+    },
   ];
 };
 
